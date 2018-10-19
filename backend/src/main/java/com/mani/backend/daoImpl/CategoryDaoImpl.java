@@ -1,59 +1,88 @@
 package com.mani.backend.daoImpl;
 
-import java.util.ArrayList;
 import java.util.List;
 
+
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mani.backend.dao.CategoryDao;
 import com.mani.backend.dto.Category;
 
 @Repository("categoryDao")
+@Transactional
 public class CategoryDaoImpl implements CategoryDao {
-
-	public static List<Category> categoryList = new ArrayList<Category>();
 	
-	static{
-		
-		Category category1 = new Category();
-		category1.setId(1);
-		category1.setName("Television");
-		category1.setDescription("this is some descrioption for tv");
-		category1.setImageURL("ca1.jpg");
-		
-		categoryList.add(category1);
-		
-		Category category2 = new Category();
-		category2.setId(2);
-		category2.setName("Mobile");
-		category2.setDescription("this is some descrioption for mobile");
-		category2.setImageURL("ca2.jpg");
-		
-		categoryList.add(category2);
-		
-		Category category3 = new Category();
-		
-		category3.setId(3);
-		category3.setName("Laptop");
-		category3.setDescription("this is some descrioption for laptop");
-		category3.setImageURL("ca3.jpg");
-		
-		categoryList.add(category3);
-		
+	@Autowired(required=true)
+	public SessionFactory sessionFactory;
+
+
+	public CategoryDaoImpl() {
+		super();
 	}
 	
-	
-	public List<Category> list() {
-		return categoryList;
+	public boolean add(Category category) {
+		
+		try
+		{
+	sessionFactory.getCurrentSession().save(category);
+		return true;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+
+	public  List<Category> list() {
+        
+		String query = "from Category where active = :active";
+         try {
+        	 
+        	return sessionFactory.getCurrentSession().createQuery(query).setParameter("active", true).list();
+		
+        	/* Query qu =  sessionFactory.getCurrentSession().createQuery(query);
+        	 qu.setParameter("active", true);
+        	 return qu.list();*/
+		} catch (Exception e) {
+            e.printStackTrace();
+		}
+		return null;
 	}
 
 	public Category get(int id) {
 		
-		for(Category category:categoryList)
-		{
-			if(category.getId()==id)return category;
+		return (Category) sessionFactory.getCurrentSession().get(Category.class, id);
+	}
+	public boolean updateCategory(Category category) {
+		try {
+			sessionFactory.getCurrentSession().update(category);
+			return true;
+			
+		} catch (Exception e) {
+              e.printStackTrace();
+              return false;
 		}
-		return null;
+		
+	}
+
+	public boolean deleteCategory(Category category) {
+		
+		category.setActive(false);
+        try {
+		
+       sessionFactory.getCurrentSession().update(category);
+      
+       	 return true;
+		} catch (Exception e) {
+           e.printStackTrace();
+           return false;
+		}
+		
 	}
 
 }

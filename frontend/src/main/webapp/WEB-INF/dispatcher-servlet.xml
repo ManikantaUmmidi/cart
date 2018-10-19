@@ -11,7 +11,7 @@
    >
    
    <context:component-scan base-package="com.app.frontend.controller"></context:component-scan>
-   <context:component-scan base-package="com.mani.backend.daoImpl"></context:component-scan>
+   <context:component-scan base-package="com.mani.backend"></context:component-scan>
    
    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"/>

@@ -7,12 +7,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mani.backend.dao.CategoryDao;
+import com.mani.backend.dao.ProductDao;
 
 @Controller
 public class PageController {
 
 	@Autowired
 	private CategoryDao categoryDao;
+	
+	@Autowired
+	private ProductDao productDao;
 	
 	
 	
@@ -23,6 +27,9 @@ public class PageController {
 		model.addObject("title", "Home");
 		model.addObject("userClickHome", true);
 		model.addObject("categories",categoryDao.list());
+		
+		System.out.println(productDao.list());
+		
 	
 		return model;
 		
