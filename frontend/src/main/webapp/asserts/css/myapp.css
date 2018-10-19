@@ -18,8 +18,9 @@ html{
 	padding-bottom:60px;
 }
 footer{
-	position: absolute;
+	position: static;
 	bottom: -25px;
+	
 	height: 10px;
 	width: 100%;
 }

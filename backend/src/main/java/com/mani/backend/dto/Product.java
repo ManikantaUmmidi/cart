@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "product")
 public class Product {
@@ -18,11 +20,15 @@ public class Product {
 	private String name;
 	private String code;
 	private String brand;
+	@JsonIgnore
 	private String description;
 	private double unitPrice;
 	private int quantity;
+	@JsonIgnore
 	private boolean active;
+	@JsonIgnore
 	private int categoryId;
+	@JsonIgnore
 	private int supplierId;
 	private int purchases;
 	private int views;

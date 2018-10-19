@@ -26,6 +26,25 @@
        
        </div>
      
+     
+       <div class="row">
+          <div class='col-md-12'>
+             
+             <table id="productListTable" class="table table-striped table-boaderd">
+             
+                <thead>
+                  <tr>
+                  <th>ID</th>
+                  <th>NAME</th>
+                  </tr>
+                </thead>
+              
+             </table>
+          
+          </div>
+       
+       </div>
+       
      </div>
   
   

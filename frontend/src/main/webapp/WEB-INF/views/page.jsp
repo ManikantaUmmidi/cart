@@ -32,6 +32,8 @@
 
     <!-- Custom styles for this template -->
     <link href="${css}/myapp.css" rel="stylesheet">
+    
+      <link href="${css}/dataTables.bootstrap.css" rel="stylesheet">
     <link href="${css}/bootstrap-watch-style.css" rel="stylesheet">
     
 
@@ -62,11 +64,13 @@
    </c:if>
    
    </div>
-   <%@include file="./shared/footer.jsp" %>
-
+ <%--   <%@include file="./shared/footer.jsp" %>
+ --%>
     <!-- Bootstrap core JavaScript -->
     <script src="${js}/jquery.js"></script>
     <script src="${js}/bootstrap.bundle.min.js"></script>
+     <script src="${js}/jquery.dataTables.js"></script>
+      <%-- <script src="${js}/dataTables.bootstrap.js"></script> --%>
     <script src="${js}/myapp.js" type="text/javascript"></script>
 
 </div>
