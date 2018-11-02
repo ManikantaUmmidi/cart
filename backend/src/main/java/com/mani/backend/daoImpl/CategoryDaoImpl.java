@@ -43,7 +43,7 @@ public class CategoryDaoImpl implements CategoryDao {
 		String query = "from Category where active = :active";
          try {
         	 
-        	return sessionFactory.getCurrentSession().createQuery(query).setParameter("active", true).list();
+        	return (List<Category>)sessionFactory.getCurrentSession().createQuery(query).setParameter("active", true).list();
 		
         	/* Query qu =  sessionFactory.getCurrentSession().createQuery(query);
         	 qu.setParameter("active", true);

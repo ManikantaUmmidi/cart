@@ -30,6 +30,8 @@ public class JsonDataController {
 	@ResponseBody
 	public List<Product> getProductByCategory(@PathVariable int id)
 	{
+		System.out.println("inside methods");
+		System.out.println(productDao.listActiveProductByCategory(id));
 		return productDao.listActiveProductByCategory(id);
 	}
 	

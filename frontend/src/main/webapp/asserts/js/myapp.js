@@ -25,29 +25,83 @@ $(function(){
 	
 	//code for jquery data Table
 	
-	var products = [
-	                ['1','ABC'],
-	                ['2','FSA'],
-	                ['3','RTS'],
-	                ['4','DFC'],
-	                ['5','GSD'],
-	                ['6','NDF'],
-	                ['7','FGS'],
-	                ['8','VAD'],
-	                ['9','JGG']
-	               
-	               ];
+	
 	
 	 var $table = $("#productListTable");
 	 
 	 if($table.length)
 	 {
 		 
+		 var jsonUrl = '';
+		 
+		 if(window.categoryId == '')
+			 {
+			 jsonUrl = window.contextRoot +"/json/data/all/products";
+			 }
+		 else
+			 {
+			 jsonUrl = window.contextRoot+"/json/data/category/"+window.categoryId+"/products";
+			 }
+		 
 		 $table.DataTable({
 			 
 			lengthMenu:[[3,5,10,-1],["3 Records","5 Records","10 Records","ALL Records",]],
 			pageLength:5,
-			data: products
+			ajax:{
+				url:jsonUrl,
+				dataSrc:'',
+			},
+			columns:[
+			         
+			         {
+			        	data:'code',
+			        	mRender: function(data,type,row){
+			        		return '<img class="dataTableImg" style="width:100px;height:100px;" src="'+window.contextRoot+'/resources/images/'+data+'.jpg"/>';
+			        		
+			        	}
+			         },
+			                 
+			         {
+			        	  data:'name'
+			         },
+			         {
+			        	  data:'brand'
+			         },
+			         {
+			        	  data:'unitPrice',
+			        	  mRender: function(data,type,row){
+			        		  return '&#8377; '+data
+			        	  }
+			         },
+			         {
+			        	  data:'quantity',
+			        	  mRender: function(data, type, row){
+			        		  if(data < 1)
+			        			  {
+			        			  
+			        			    return '<span style="color:red">Out of Stoke!</span>';
+			        			  }
+			        		  return data;
+			        	  }
+			         },
+			         {
+			        	 data:'id',
+			        	 mRender:function(data,type,row){
+			        		 var str = '';
+			        		 
+			        		 if(row.quantity < 1)
+			        			 {
+			        			 str +='<a href="javascript:void(0)" class="btn btn-success disabled"><i class="fa fa-shopping-cart"></i></a>';
+			        			 }
+			        		 else
+			        			 {
+			        			 str +='<a href="'+window.contextRoot+'/cart/add/'+data+'/product" class="btn btn-success"><i class="fa fa-shopping-cart"></i></a>';
+			        			 }
+			        		 str +='<a href="'+window.contextRoot+'/show/'+data+'/product" class="btn btn-primary"><i class="fa fa-eye"></i></a>&nbsp;';
+			        		 return str;
+			        	 }
+			         }
+			         ]
 		 })
 	 }
 	 
