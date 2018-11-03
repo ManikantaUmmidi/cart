@@ -14,6 +14,12 @@
 
 <head>
 
+<style>
+  .help-block{
+    color:red;
+  }
+
+</style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta charset="utf-8">
 <meta name="viewport"
@@ -68,6 +74,11 @@
 			<c:if
 				test="${userClickShowProduct == true}">
 				<%@include file="singleProduct.jsp"%>
+			</c:if>
+			
+			<c:if
+				test="${userClickManageProducts == true}">
+				<%@include file="manageProducts.jsp"%>
 			</c:if>
 
 		</div>

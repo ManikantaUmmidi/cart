@@ -7,6 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.Min;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -17,11 +22,18 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	
+	@NotBlank(message = "Please Enter Product Name!")
 	private String name;
 	private String code;
+	
+	@NotBlank(message = "Please Enter Brand Name!")
 	private String brand;
 	@JsonIgnore
+	@NotBlank(message="Please Enter Description for Product!")
 	private String description;
+	
+	@Min(value=1,message="value for unitPrice should must be greater than 1!")
 	private double unitPrice;
 	private int quantity;
 	@JsonIgnore
@@ -33,7 +45,16 @@ public class Product {
 	private int purchases;
 	private int views;
 	
+	@Transient
+	private MultipartFile file;
 	
+	
+	public MultipartFile getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", code=" + code + ", brand=" + brand + ", description="

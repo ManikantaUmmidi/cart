@@ -19,6 +19,8 @@
    
    </bean>
    
+   <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
+   
    <mvc:annotation-driven/>
    <mvc:resources location="/asserts/" mapping="/resources/**"/>
    

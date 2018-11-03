@@ -12,6 +12,10 @@ $(function(){
 		$("#listProducts").addClass("active");
 		 $("#a_"+menu).addClass("active");
 		break;
+	case 'Manage Products':
+		$("#manageProducts").addClass("active");
+		 $("#a_"+menu).addClass("active");
+		break;
 	case 'Home':
 		$("#home").addClass("active");
 		break;
@@ -105,6 +109,19 @@ $(function(){
 		 })
 	 }
 	 
+	 
+	 
+	 //closing alert box
+	 
+	 var $alert = $('.alert');
+	 if($alert.length)
+		 {
+		   setTimeout(function(){
+			   
+			   $alert.fadeOut("slow");
+		   },3000)
+		 
+		 }
 	 
 	
 });
