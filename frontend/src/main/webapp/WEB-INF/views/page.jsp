@@ -18,6 +18,10 @@
   .help-block{
     color:red;
   }
+  .adminDataTableImg{
+    height:50px;  
+    width:50px;
+  }
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -86,9 +90,11 @@
  --%>
 		<!-- Bootstrap core JavaScript -->
 		<script src="${js}/jquery.js"></script>
+		<script src="${js}/jquery.validate.js"></script>
 		<script src="${js}/bootstrap.bundle.min.js"></script>
 		<script src="${js}/jquery.dataTables.js"></script>
 		<%-- <script src="${js}/dataTables.bootstrap.js"></script> --%>
+		<script src="${js}/bootbox.min.js" type="text/javascript"></script>
 		<script src="${js}/myapp.js" type="text/javascript"></script>
 
 	</div>

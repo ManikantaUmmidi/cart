@@ -36,7 +36,6 @@ public class Product {
 	@Min(value=1,message="value for unitPrice should must be greater than 1!")
 	private double unitPrice;
 	private int quantity;
-	@JsonIgnore
 	private boolean active;
 	@JsonIgnore
 	private int categoryId;
