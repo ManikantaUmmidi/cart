@@ -64,7 +64,7 @@ public class UserTestCase {
 		if(user.getRole().equals("USER"))
 		{
 			cart = new Cart();
-			cart.setUserId(user.getId());
+			cart.setUser(user);
 			assertEquals("Failed to add Cart",true,userDao.addCart(cart));
 		
 		  

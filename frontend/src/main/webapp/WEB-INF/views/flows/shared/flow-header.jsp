@@ -47,6 +47,16 @@
 <link href="${css}/dataTables.bootstrap.css" rel="stylesheet">
 <link href="${css}/bootstrap-watch-style.css" rel="stylesheet">
 
+<style>
+  #role{
+    margin-left: 200px;
+   
+  }
+  #gridRadios{
+    margin-left: 220px;
+  }
+
+</style>
 
 </head>
 

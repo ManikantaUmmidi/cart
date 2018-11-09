@@ -54,4 +54,20 @@ public class UserDaoImpl implements UserDao {
 		       }
 	}
 
+	public User getUserByEmail(String email) {
+		
+		try {
+			
+			return sessionFactory.getCurrentSession().createQuery("from User where email=:email",User.class)
+			                                  .setParameter("email", email)
+			                                  .list()
+			                                  .get(0);
+			
+		} catch (Exception e) {
+                   e.printStackTrace();
+                   return null;
+		}
+		
+	}
+
 }

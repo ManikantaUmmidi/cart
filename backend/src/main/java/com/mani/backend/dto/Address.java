@@ -1,33 +1,49 @@
 package com.mani.backend.dto;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 
 @Entity
 @Table(name="address")
-public class Address {
+public class Address implements Serializable{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
 	private int userId;
 	
+	@NotBlank(message="Please Enter Address Line One")
 	private String addressLineOne;
 	
+	@NotBlank(message="Please Enter Address Line Two")
 	private String addressLineTwo;
 	
+	
+	@NotBlank(message="Please Enter City Name!")
 	private String city;
 	
+	@NotBlank(message="Please Enter State Name!")
 	private String state;
 	
+	@NotBlank(message="Please Enter Country Name!")
 	private String country;
 	
+	@NotBlank(message="Please Enter Postal Address")
 	private String postalCode;
 	
 	private boolean shipping;

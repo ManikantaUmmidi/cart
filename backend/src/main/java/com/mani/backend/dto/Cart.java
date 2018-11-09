@@ -1,24 +1,40 @@
 package com.mani.backend.dto;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="cart")
-public class Cart {
+public class Cart implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	private int userId;
+    
+	@OneToOne
+	private User user;
+	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	private double grandTotal;
 	private int cartLines;
 	@Override
 	public String toString() {
-		return "Cart [id=" + id + ", userId=" + userId + ", grandTotal=" + grandTotal + ", cartLines=" + cartLines
+		return "Cart [id=" + id + ", userId=" + user + ", grandTotal=" + grandTotal + ", cartLines=" + cartLines
 				+ "]";
 	}
 	public int getId() {
@@ -27,12 +43,7 @@ public class Cart {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+	
 	public double getGrandTotal() {
 		return grandTotal;
 	}

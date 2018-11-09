@@ -1,32 +1,72 @@
 package com.mani.backend.dto;
 
+import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="user")
-public class User {
+public class User implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
+	@NotBlank(message="Please Enter First Name!")
 	private String firstName;
 	
+	@NotBlank(message="Please Enter Last Name!")
 	private String lastName;
 	
+	@NotBlank(message="Please Enter Email!")
 	private String email;
 	
+	@NotBlank(message="Please Enter Contact Number!")
 	private String contactNumber;
 	
 	private String role;
 	
+	@NotBlank(message="Please Enter Password!")
 	private String password;
 	
 	private boolean enabled= true;
+	
+	@OneToOne(cascade = CascadeType.ALL, mappedBy="user")
+	private Cart cart;
+	
+	@Transient
+	@NotBlank(message="Please Enter Confirm Password!")
+	private String confirmPassword;
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
 
 	@Override
 	public String toString() {

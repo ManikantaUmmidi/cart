@@ -11,5 +11,7 @@ public interface UserDao {
 	boolean addAddress(Address address);
 	
 	boolean addCart(Cart cart);	
+	
+	User getUserByEmail(String email);
 
 }
