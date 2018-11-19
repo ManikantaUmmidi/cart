@@ -29,7 +29,18 @@ $(function(){
 	
 	// code for jquery data Table
 	
+	var token = $("meta[name='_csrf']").attr('content');
+	var header = $("meta[name='_csrf_header']").attr('content');
 	
+	if(token.length >0 && header.length >0)
+		{
+		    $(document).ajaxSend(function(e,xhr,options){
+		    
+		    	 xhr.setRequestHeader(header,token);
+		    	
+		    })
+		
+		}
 	
 	 var $table = $("#productListTable");
 	 
@@ -320,6 +331,50 @@ $(function(){
 			 
 		 })
 		 }
+	 
+	 var $loginForm = $("#loginForm");
+
+	 alert($loginForm.html());
+	 	 
+	 	 if($loginForm.length)
+	 		 {
+	 		 
+	 		 $loginForm.validate({
+	 			 
+	 			 rules :{
+	 				 
+	 				 username:{
+	 					 
+	 					 required:true,
+	 					 email:true
+	 				 },
+	 				 password:{
+	 					 required:true,
+	 					 
+	 				 }
+	 				 
+	 			 },
+	 			 messages:{
+	 				 
+	 				 username:{
+	 					 
+	 					 required:'Please  Enter Username',
+	 					 email:'Please Enter Valid Email Address'
+	 				 },
+	 				 password:{
+	 					 
+	 					 required:'Please Enter password'
+	 				 }
+	 			 },
+	 			 errorElement:'em',
+	 			 errorPlacement:function(error,element){
+	 				 
+	 				 error.addClass('help-block');
+	 				 error.insertAfter(element);
+	 			 }
+	 			 
+	 		 })
+	 		 }
 	 
 	 } )
 

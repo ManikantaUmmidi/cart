@@ -3,6 +3,7 @@ package com.app.frontend.handler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.app.frontend.model.RegisterModel;
@@ -15,7 +16,10 @@ import com.mani.backend.dto.User;
 public class RegisterHandler {
 	
 	@Autowired
-	private UserDao userDao;
+ 	private UserDao userDao;
+
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	public RegisterModel init()
 	{
@@ -41,6 +45,9 @@ public class RegisterHandler {
 			 Cart cart = new Cart();
 			 cart.setUser(user);
 		}
+		
+		
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		
 	   userDao.addUser(user);
 	   

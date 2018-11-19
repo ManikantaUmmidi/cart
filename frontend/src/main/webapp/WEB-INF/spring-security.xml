@@ -1,23 +1,35 @@
 <b:beans xmlns="http://www.springframework.org/schema/security"
 		 xmlns:b="http://www.springframework.org/schema/beans"
+		   xmlns:context="http://www.springframework.org/schema/context"
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
-						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd">
+						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
+						   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+   
+      <context:component-scan base-package="com.mani.backend"/>
+       <b:bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>	
 
-	
+	<http pattern="/resources/**" security="none"></http>
 	
 	<http auto-config="true">
-	  <intercept-url pattern="/**" access="hasRole('USER')"/>
-	  <!--    <form-login/>
-	     <logout/> -->
+		  <intercept-url pattern="/manage/**" access="hasAuthority('ADMIN')"/>
+    	  <intercept-url pattern="/cart/**" access="hasAuthority('USER')"/>
+	  <intercept-url pattern="/**" access="permitAll"/>
+   	  
+	     <form-login login-page="/login"/>
+         <access-denied-handler error-page="/access-denied"/>
+	     <logout/> 
 	</http>
 	
 	
 	 <authentication-manager>
     <authentication-provider>
-      <user-service>
-        <user name="mani" password="manipassword" authorities="ROLE_USER, ROLE_ADMIN" />
-      </user-service>
+      <password-encoder ref="passwordEncoder"/>
+      <jdbc-user-service data-source-ref="dataSource"
+         users-by-username-query="select email,password,enabled from user where email=?"
+         authorities-by-username-query="select email, role from user where email=?"/>
+      
     </authentication-provider>
   </authentication-manager>
 </b:beans>
